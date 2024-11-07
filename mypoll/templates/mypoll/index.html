@@ -1,0 +1,40 @@
+{% extends "mypoll/base.html" %}
+
+{% block content %}
+
+
+
+<div class="container mt-4">
+    <a href="{% url 'poll'%}" type="submit" class="btn btn-secondary mb-5" >Add Post</a>
+
+    <form>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="category">
+            <div class="form-text">Search by Category </div>
+        </div>
+        <button type="submit" class="btn btn-primary" >Search</button>
+    </form>
+</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-4">
+        {% for polls in poll  %}
+        <div class="col">
+        <div class="card h-100">
+            
+            <div class="card-body">
+                <h5 class="card-title">{{polls.author}}</h5>
+                <p class="card-text">{{polls.post}}</p>
+                <p class="card-text">Category:{{polls.categories}}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-0" >tags:#{{polls.tag}}</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">{{polls.date_created}}</small>
+            </div>
+            <a href="{% url 'editpoll' polls.id %}"> Edit </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
